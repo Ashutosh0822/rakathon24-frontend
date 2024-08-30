@@ -14,7 +14,9 @@ const ExperimentPage = () => {
       bodyShape: "thin",
     },
   ]);
-  const [imageUrls, setImages] = useState([]);
+  const [imageUrls, setImages] = useState([
+    "https://hotpotmedia.s3.us-east-2.amazonaws.com/8-wTIggq6Vu6sXNgH.png",
+  ]);
   const [targetAudienceData, TargetAudienceHandler] = useState({
     targetAudienceAge: "kid",
     gender: "female",
@@ -29,7 +31,7 @@ const ExperimentPage = () => {
         contextData,
       })
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setImages(res.data.imgUrls);
       });
   };
@@ -48,49 +50,53 @@ const ExperimentPage = () => {
             sx={{ justifyContent: "center" }}
           />
         </Grid2>
+        <AddIcon
+            sx={{ padding: 15, margin: 15 }}
+            fontSize="large"
+            onClick={(e) => {
+              e.preventDefault();
+              if (cnt < 3) {
+                updateCount(cnt + 1);
+                contextHander([
+                  ...contextData,
+                  {
+                    bodyShape: "thin",
+                  },
+                ]);
+              }
+            }}
+        />
         <Grid2>
-          <Grid2 container>
+          <Grid2>
             {nos
               .filter((no) => no <= cnt)
               .map((no) => (
-                <ContextDetails
-                  key={no}
-                  ind={no}
-                  data={contextData}
-                  handler={contextHander}
-                  sx={{ justifyContent: "center" }}
-                />
+                <>
+                  <Grid2>
+                    <ContextDetails
+                      key={no}
+                      ind={no}
+                      data={contextData}
+                      handler={contextHander}
+                      sx={{ justifyContent: "center" }}
+                    />
+                  </Grid2>
+
+                  {imageUrls.length >= no ? (
+                    <Grid2>
+                      <img key={imageUrls[no - 1]} src={imageUrls[no - 1]} />
+                    </Grid2>
+                  ) : null}
+                </>
               ))}
-            <AddIcon
-              sx={{ padding: 15, margin: 15 }}
-              fontSize="large"
-              onClick={(e) => {
-                e.preventDefault();
-                if (cnt < 3) {
-                  updateCount(cnt + 1);
-                  contextHander([
-                    ...contextData,
-                    {
-                      bodyShape: "thin",
-                    },
-                  ]);
-                }
-              }}
-            />
           </Grid2>
         </Grid2>
+
         <Grid2>
           <Button variant="outlined" onClick={() => submitForm()}>
             Generate Results
           </Button>
         </Grid2>
-      </Grid2>
-      <Grid2>
-            {
-              imageUrls.map(
-                url=><img key={url} src={url}/>
-              )
-            }
       </Grid2>
     </>
   );
