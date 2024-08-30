@@ -29,7 +29,8 @@ const ExperimentPage = () => {
         contextData,
       })
       .then((res) => {
-        setImages(res.data.imageUrls);
+        console.log(res)
+        setImages(res.data.imgUrls);
       });
   };
   return (
