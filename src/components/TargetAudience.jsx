@@ -1,12 +1,9 @@
 import {
-  Box,
   createTheme,
   FormControl,
   FormLabel,
-  Grid,
   Grid2,
   Paper,
-  TextField,
   ThemeProvider,
   Radio,
   RadioGroup,
@@ -81,13 +78,13 @@ const TargetAudience = ({ data, handler }) => {
               id="demo-simple-select"
               value={data.age}
               label="Age"
-              defaultValue={`kid`}
+              defaultValue={`young`}
               onChange={(e) =>
                 handler({ ...data, 'targetAudienceAge': e.target.value })
               }
             >
-              <MenuItem value={`kid`}>Kid</MenuItem>
-              <MenuItem value={`teen`}>Teen</MenuItem>
+             
+              <MenuItem value={`young`}>Teen</MenuItem>
               <MenuItem value={`mid-thirties`}>Mid 30s and 40s</MenuItem>
               <MenuItem value={`old`}>Old</MenuItem>
             </Select>

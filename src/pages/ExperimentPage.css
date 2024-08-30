@@ -1,0 +1,112 @@
+/* Container styles */
+/* Container styles */
+/* Container styles */
+.experiment-container {
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1%;
+    background: linear-gradient(45deg, 
+        rgba(173, 216, 230, 1), /* Light Blue */
+        rgba(211, 211, 211, 1), /* Light Grey */
+        rgba(169, 169, 169, 1)  /* Light Muddy Grey */
+    ); 
+    background-size: cover; /* Ensures the gradient covers the entire area */
+    background-repeat: no-repeat; /* Prevents the gradient from repeating */
+    background-position: center; /* Centers the image */
+}
+
+
+
+
+/* Header styling */
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Form sections */
+.form-section {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px; /* Increase max-width if needed to fit components */
+    display: flex;
+    flex-direction: row; /* Align children horizontally */
+    justify-content: center; /* Center children horizontally */
+    gap: 10px; /* Adjusted space between components */
+}
+
+/* Align heading and fields in a single line and center them */
+.form-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Increased space between label and field */
+    width: 15%;
+}
+
+/* Add a solid line above the context section */
+.context-divider {
+    width: 100%;
+    max-width: 1200px; /* Ensure it fits the form section width */
+    border-top: 2px solid #333; /* Solid dark gray line */
+    margin: 20px 0px; /* Space above and below the line */
+}
+
+/* Context container to keep items in one line */
+.context-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Add horizontal scrolling if needed */
+    align-items: center;
+    gap: 10px; /* Adjusted space between context items */
+    justify-content: center; /* Center items horizontally */
+}
+
+/* Context item styling to align labels and fields */
+.context-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Adjusted space between context item label and field */
+}
+
+/* Add icon styling */
+.add-icon {
+    padding: 10px; /* Reduced padding */
+    margin: 10px; /* Reduced margin */
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.add-icon:hover {
+    background-color: #d0d0d0;
+}
+
+/* Button styling */
+.generate-button {
+    margin-top: 20px;
+    width: 200px;
+    font-size: 16px;
+}
+
+/* Image grid */
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.image-grid img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+}

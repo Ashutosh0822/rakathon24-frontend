@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import ProductDetails from "../components/ProductDetailsComponent";
-import TargetAudience from "../components/TargetAudiene";
+import TargetAudience from "../components/TargetAudience";
 import ContextDetails from "../components/ContextDetailsComponent";
-import { Button, Grid2 } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
+import "./ExperimentPage.css";
 
 const ExperimentPage = () => {
+  const maxContexts = 3;
   const nos = [1, 2, 3];
-  const [productData, productHandler] = useState({});
-  const [contextData, contextHander] = useState([
-    {
-      bodyShape: "thin",
-    },
+
+  const [productData, setProductData] = useState({});
+  const [contextData, setContextData] = useState([
+    { bodyShape: "thin" },
   ]);
-  const [imageUrls, setImages] = useState([]);
-  const [targetAudienceData, TargetAudienceHandler] = useState({
-    targetAudienceAge: "kid",
+  const [imageUrls, setImageUrls] = useState([]);
+  const [targetAudienceData, setTargetAudienceData] = useState({
+    targetAudienceAge: "young",
     gender: "female",
   });
-  const [cnt, updateCount] = useState(1);
+  const [contextCount, setContextCount] = useState(1);
+
   const submitForm = () => {
     console.log({ productData, targetAudienceData, contextData });
     axios
@@ -29,70 +31,75 @@ const ExperimentPage = () => {
         contextData,
       })
       .then((res) => {
-        console.log(res)
-        setImages(res.data.imgUrls);
+        setImageUrls(res.data.imageUrls);
       });
   };
+
+  const addContext = (e) => {
+    e.preventDefault();
+    if (contextCount < maxContexts) {
+      setContextCount((prevCount) => prevCount + 1);
+      setContextData((prevData) => [
+        ...prevData,
+        { bodyShape: "thin" },
+      ]);
+    }
+  };
+
   return (
-    <>
-      <Grid2 sx={{ padding: "2%", justifyContent: "center", margin: "1%" }}>
-        <Grid2>
+    <div className="experiment-container">
+      <div className="header">
+        <div className="paper-root">
+          
+        </div>
+      </div>
+      <div className="form-section">
+        <div className="form-item">
           <ProductDetails
             data={productData}
-            handler={productHandler}
-            sx={{ justifyContent: "center" }}
+            handler={setProductData}
           />
+        </div>
+        <div className="form-item">
           <TargetAudience
             data={targetAudienceData}
-            handler={TargetAudienceHandler}
-            sx={{ justifyContent: "center" }}
+            handler={setTargetAudienceData}
           />
-        </Grid2>
-        <Grid2>
-          <Grid2 container>
-            {nos
-              .filter((no) => no <= cnt)
-              .map((no) => (
-                <ContextDetails
-                  key={no}
-                  ind={no}
-                  data={contextData}
-                  handler={contextHander}
-                  sx={{ justifyContent: "center" }}
-                />
-              ))}
-            <AddIcon
-              sx={{ padding: 15, margin: 15 }}
-              fontSize="large"
-              onClick={(e) => {
-                e.preventDefault();
-                if (cnt < 3) {
-                  updateCount(cnt + 1);
-                  contextHander([
-                    ...contextData,
-                    {
-                      bodyShape: "thin",
-                    },
-                  ]);
-                }
-              }}
-            />
-          </Grid2>
-        </Grid2>
-        <Grid2>
-          <Button variant="outlined" onClick={() => submitForm()}>
-            Generate Results
-          </Button>
-        </Grid2>
-      </Grid2>
-      <Grid2>
-            {
-              imageUrls.map(
-                url=><img key={url} src={url}/>
-              )
-            }
-      </Grid2>
-    </>
+        </div>
+      </div>
+      {/* Divider Line Above Context Section */}
+      <hr className="context-divider" />
+      <div className="form-section">
+        <div className="context-container">
+          {nos
+            .filter((no) => no <= contextCount)
+            .map((no) => (
+              <ContextDetails
+              
+                key={no}
+                ind={no}
+                data={contextData}
+                handler={setContextData}
+              />
+            ))}
+          <IconButton className="add-icon" onClick={addContext}>
+            <AddIcon />
+          </IconButton>
+        </div>
+      </div>
+      <Button
+        className="generate-button"
+        variant="outlined"
+        onClick={submitForm}
+      >
+        Generate Results
+      </Button>
+      <div className="image-grid">
+        {imageUrls.map((url) => (
+          <img key={url} src={url} alt="Generated result" />
+        ))}
+      </div>
+    </div>
   );
 };
 

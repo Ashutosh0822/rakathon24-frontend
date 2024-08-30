@@ -9,6 +9,9 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
+  MenuItem,
+  Select,
+  InputLabel
 } from "@mui/material";
 import React from "react";
 
@@ -17,7 +20,7 @@ const ContextDetails = ({ data, handler, ind }) => {
   const onChange= (e, label) => {
     let i=1;
     handler(data.map(d=>{
-      if(ind==i){
+      if(ind===i){
         i++;
         return {...d,[label]:e.target.value}
       }
@@ -47,7 +50,7 @@ const ContextDetails = ({ data, handler, ind }) => {
                 lineHeight: "40px",
               }}
             >
-              Context Details
+              Context 
             </Paper>
           </ThemeProvider>
         </Grid2>
@@ -61,15 +64,7 @@ const ContextDetails = ({ data, handler, ind }) => {
           
           />
         </Grid2>
-        <Grid2 sx={{ justifyItems: "center", paddingTop: "2%" }}>
-          <TextField
-            id="filled-multiline-flexible"
-            label="Actor age"
-            name="actorAge"
-            variant="filled"
-            onChange={(e)=>onChange(e,e.target.name)}
-          />
-        </Grid2>
+
         <Grid2 sx={{ justifyItems: "center", paddingTop: "2%" }}>
           <TextField
             id="filled-multiline-flexible"
@@ -79,29 +74,6 @@ const ContextDetails = ({ data, handler, ind }) => {
             onChange={(e)=>onChange(e,e.target.name)}
           />
         </Grid2>
-        <Grid2 sx={{ justifyItems: "center", paddingTop: "2%" }}>
-          <FormControl>
-            <FormLabel id="demo-radio-buttons-group-label">
-              Body Shape
-            </FormLabel>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="fit"
-              name="radio-buttons-group"
-              onChange={(e)=>onChange(e,'bodyShape')}
-            >
-              <FormControlLabel value="fit" control={<Radio />} label="Fit" />
-              <FormControlLabel value="thin" control={<Radio />} label="Thin" />
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel
-                value="fat"
-                control={<Radio />}
-                label="Healthy"
-              />
-            </RadioGroup>
-          </FormControl>
-        </Grid2>
-
         <Grid2 sx={{ justifyItems: "center", paddingTop: "2%" }}>
           <TextField
             id="filled-multiline-flexible"
@@ -146,6 +118,49 @@ const ContextDetails = ({ data, handler, ind }) => {
            
           />
         </Grid2>
+
+        <Grid2 sx={{ justifyItems: "center", paddingTop: "2%" }}>
+          <FormControl>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Body Shape
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="fit"
+              name="radio-buttons-group"
+              onChange={(e)=>onChange(e,'bodyShape')}
+            >
+              <FormControlLabel value="fit" control={<Radio />} label="Fit" />
+              <FormControlLabel value="thin" control={<Radio />} label="Thin" />
+              
+              <FormControlLabel
+                value="fat"
+                control={<Radio />}
+                label="Healthy"
+              />
+            </RadioGroup>
+          </FormControl>
+        </Grid2>
+        <Grid2>
+        <FormControl sx={{margin:1}}>
+            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={data.actorAge}
+              label="Actor age"
+              defaultValue={`young`}
+              onChange={(e) =>
+                handler({ ...data, 'actorAge': e.target.value })
+              }
+            >
+             
+              <MenuItem value={`young`}>Teen</MenuItem>
+              <MenuItem value={`mid-thirties`}>Mid 30s and 40s</MenuItem>
+              <MenuItem value={`old`}>Old</MenuItem>
+            </Select>
+          </FormControl>
+          </Grid2>
       </Grid2>
     </>
   );

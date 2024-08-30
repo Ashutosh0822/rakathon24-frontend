@@ -18,7 +18,7 @@ const ProductDetails = ({ data, handler }) => {
         // container
         spacing={3}
       >
-        <Grid2>
+        <Grid2 >
           <ThemeProvider theme={darkTheme}>
             <Paper
               elevation={6}
@@ -30,11 +30,11 @@ const ProductDetails = ({ data, handler }) => {
                 lineHeight: "40px",
               }}
             >
-              Product Details
+              Product 
             </Paper>
           </ThemeProvider>
         </Grid2>
-        <Grid2 sx={{ justifyItems: "center", paddingTop: "2%" }}>
+        <Grid2 sx={{ justifyItems: "center", paddingTop: "2%",opacity:"200%" }}>
           <TextField
             id="filled-multiline-flexible"
             label="Product description"
@@ -42,6 +42,7 @@ const ProductDetails = ({ data, handler }) => {
             multiline
             maxRows={4}
             variant="filled"
+            color="primary"
             onChange={(e) =>
               handler({ ...data, [e.target.name]: e.target.value })
             }
