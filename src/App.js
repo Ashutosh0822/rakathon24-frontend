@@ -15,9 +15,9 @@ class App extends React.Component{
       <Switch>
         <Route exact component={AboutPage} path='/about'/>
         <Route exact component={ExperimentPage} path='/experiment'/>
-        <Route exact component={ValidatePage} path='/validate-concept'/>
-        <Route exact component={HomePage} path='/'/>
-        <Route exact component={DevelopmentPage}/>
+        {/*<Route exact component={ValidatePage} path='/validate-concept'/>*/}
+        <Route exact component={ExperimentPage} path='/'/>
+        <Route  component={DevelopmentPage}/>
       </Switch>
       
     </div>
