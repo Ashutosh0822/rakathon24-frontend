@@ -151,7 +151,7 @@ const ContextDetails = ({ data, handler, ind }) => {
               label="Actor age"
               defaultValue={`young`}
               onChange={(e) =>
-                handler({ ...data, 'actorAge': e.target.value })
+                 onChange(e,'actorAge')
               }
             >
              
